@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form.login{
+            width:170px;
+            height:143px;
+            border: 1px solid #eee9e6;
+            margin:100px auto;
+            border-radius: 4%;
+            background: #fbebed;
+            opacity: 0.8;
+        }
+        form input.input{
+            font-size: 14px;
+            margin:10px 19px 4px;
+            width:130px;
+            height:20px;
+            color:grey;
+            border:none;
+        }
+        form input.btn{
+            width:130px;
+            height: 20px;
+            font-size: 13px;
+            margin-left: 20px;
+            margin-top:9px;
+            background: #fd043b;
+            border:none;
+            color:white;
+        }
+        .tip{
+            height:11px ;
+            font-size: 11px;
+            color: #ff464a;
+            margin-left: 22px;
+        }
+    </style>
+</head>
+<body>
+<form method="post" class="login">
+    <input class="input" type="text" name="username" value="请输入用户名" id="user" onfocus="foc('user')" onblur="change('user')"><br>
+    <div id="userTip" class="tip"></div>
+    <input class="input" type="text" name="password" value="请输入密码" id="pwd" onfocus="foc('pwd')" onblur="change('pwd')"><br>
+    <div id="pwdTip" class="tip"></div>
+    <input class="btn" type="submit" value="登&nbsp&nbsp&nbsp&nbsp录" >
+    <!-- <input class="btn" type="submit" value="注册" >-->
+</form>
+<script>
+    function foc(id){
+        var ele=document.getElementById(id);
+        ele.tipId=id+'Tip';
+        switch(id){
+            case 'user':
+                ele.oldValue='请输入用户名';
+                break;
+            case 'pwd':
+                ele.oldValue='请输入密码';
+                ele.type='password';
+                break;
+        }
+        if(ele.value === ele.oldValue){
+            ele.value='';
+            ele.style.color='black';
+        }
+    }
+    function change(id){
+        var ele=document.getElementById(id);
+        var oTip=document.getElementById(ele.tipId);
+        switch(id){
+            case 'pwd':
+                if(ele.value===''){
+                    ele.type='text';
+                    ele.style.color='grey';
+                    ele.value=ele.oldValue;
+                    oTip.innerHTML='密码长度为4-8位';
+                }else if(ele.value.length<4 || ele.value.length>8){
+                    //
+                    oTip.innerHTML='密码长度为4-8位';
+                }else{
+                    oTip.innerHTML='';
+                }
+                break;
+            case 'user':
+                if(ele.value===''){
+                    ele.style.color='grey';
+                    ele.value=ele.oldValue;
+                    oTip.innerHTML='用户名不能为空';
+                }else{
+                    oTip.innerHTML='';
+                }
+                break;
+            default : break;
+        }
+    }
+</script>
+</body>
+</html>
